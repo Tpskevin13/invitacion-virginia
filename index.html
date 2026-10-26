@@ -21,243 +21,233 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-  :root{
-    --q50:#fdf2f4; --q100:#fce7eb; --q200:#f9d2d9; --q300:#f4b0bd; --q400:#ec7f94;
-    --q500:#e1526f; --q600:#cb3754; --q700:#ab2842; --q800:#8e2439;
-    --ink:#3d2f34; --muted:#7a6a70; --soft:#a8989e;
-    --radius:24px;
-    --sat: env(safe-area-inset-top, 0px);
-    --sab: env(safe-area-inset-bottom, 0px);
-  }
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{
-    font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-    color:var(--ink);
-    background:linear-gradient(180deg,var(--q50),#fff 45%,var(--q100));
-    line-height:1.55;overflow-x:hidden;
-    padding-bottom:calc(96px + var(--sab));
-  }
-  ::selection{background:var(--q300);color:var(--q800)}
-  .script{font-family:'Great Vibes','Brush Script MT',cursive;font-weight:400}
-  .wrap{width:100%;max-width:1000px;margin:0 auto;padding:0 20px}
+:root{
+--q50:#fdf2f4; --q100:#fce7eb; --q200:#f9d2d9; --q300:#f4b0bd; --q400:#ec7f94;
+--q500:#e1526f; --q600:#cb3754; --q700:#ab2842; --q800:#8e2439;
+--ink:#3d2f34; --muted:#7a6a70; --soft:#a8989e;
+--radius:24px;
+--sat: env(safe-area-inset-top, 0px);
+--sab: env(safe-area-inset-bottom, 0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+color:var(--ink);
+background:linear-gradient(180deg,var(--q50),#fff 45%,var(--q100));
+line-height:1.55;overflow-x:hidden;
+padding-bottom:calc(96px + var(--sab));
+}
+::selection{background:var(--q300);color:var(--q800)}
+.script{font-family:'Great Vibes','Brush Script MT',cursive;font-weight:400}
+.wrap{width:100%;max-width:1000px;margin:0 auto;padding:0 20px}
 
-  /* ---------- Overlay de bienvenida ---------- */
-  #welcome{
-    position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
-    padding:20px;background:rgba(40,25,30,.55);
-    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-    transition:opacity .5s ease, visibility .5s;
-  }
-  #welcome.hide{opacity:0;visibility:hidden;pointer-events:none}
-  .welcome-card{
-    background:rgba(255,255,255,.97);border:1px solid var(--q200);border-radius:28px;
-    padding:32px 26px;max-width:360px;width:100%;text-align:center;
-    box-shadow:0 25px 60px rgba(0,0,0,.25);animation:float 4s ease-in-out infinite;
-  }
-  .welcome-icon{
-    width:68px;height:68px;border-radius:50%;background:var(--q100);
-    display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 14px;
-  }
-  .welcome-card h3{font-size:3rem;color:var(--q700);line-height:1.1;margin-bottom:10px}
-  .welcome-card p{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:22px}
+/* ---------- Overlay de bienvenida ---------- */
+#welcome{
+position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
+padding:20px;background:rgba(40,25,30,.55);
+-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+transition:opacity .5s ease, visibility .5s;
+}
+#welcome.hide{opacity:0;visibility:hidden;pointer-events:none}
+.welcome-card{
+background:rgba(255,255,255,.97);border:1px solid var(--q200);border-radius:28px;
+padding:32px 26px;max-width:360px;width:100%;text-align:center;
+box-shadow:0 25px 60px rgba(0,0,0,.25);animation:float 4s ease-in-out infinite;
+}
+.welcome-icon{
+width:68px;height:68px;border-radius:50%;background:var(--q100);
+display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 14px;
+}
+.welcome-card h3{font-size:3rem;color:var(--q700);line-height:1.1;margin-bottom:10px}
+.welcome-card p{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:22px}
 
-  /* ---------- Botones ---------- */
-  .btn{
-    display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
-    min-height:52px;padding:14px 22px;border:0;border-radius:14px;cursor:pointer;
-    font:600 .85rem 'Montserrat',sans-serif;letter-spacing:.08em;text-transform:uppercase;
-    text-decoration:none;color:#fff;background:var(--q500);
-    box-shadow:0 8px 20px rgba(225,82,111,.28);
-    transition:transform .15s ease, background .2s ease;
-  }
-  .btn:hover{background:var(--q600)}
-  .btn:active{transform:scale(.97)}
-  .btn.dark{background:#2e2428;box-shadow:0 8px 20px rgba(0,0,0,.18)}
-  .btn.dark:hover{background:#1c1417}
-  .btn.ghost{background:transparent;color:var(--q600);box-shadow:none;border:1.5px solid var(--q300)}
-  .btn.ghost:hover{background:var(--q50)}
-  .btn-row{display:grid;gap:10px}
-  :focus-visible{outline:3px solid var(--q400);outline-offset:3px;border-radius:10px}
+/* ---------- Botones ---------- */
+.btn{
+display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+min-height:52px;padding:14px 22px;border:0;border-radius:14px;cursor:pointer;
+font:600 .85rem 'Montserrat',sans-serif;letter-spacing:.08em;text-transform:uppercase;
+text-decoration:none;color:#fff;background:var(--q500);
+box-shadow:0 8px 20px rgba(225,82,111,.28);
+transition:transform .15s ease, background .2s ease;
+}
+.btn:hover{background:var(--q600)}
+.btn:active{transform:scale(.97)}
+.btn.dark{background:#2e2428;box-shadow:0 8px 20px rgba(0,0,0,.18)}
+.btn.dark:hover{background:#1c1417}
+.btn.ghost{background:transparent;color:var(--q600);box-shadow:none;border:1.5px solid var(--q300)}
+.btn.ghost:hover{background:var(--q50)}
+.btn-row{display:grid;gap:10px}
+:focus-visible{outline:3px solid var(--q400);outline-offset:3px;border-radius:10px}
 
-  /* ---------- Botón de música ---------- */
-  #music-toggle{
-    position:fixed;right:16px;bottom:calc(16px + var(--sab));z-index:60;
-    display:none;align-items:center;gap:10px;min-height:48px;padding:12px 18px;
-    border:1px solid var(--q300);border-radius:999px;cursor:pointer;color:#fff;
-    background:rgba(225,82,111,.95);box-shadow:0 10px 25px rgba(0,0,0,.2);
-    font:600 .7rem 'Montserrat',sans-serif;letter-spacing:.1em;text-transform:uppercase;
-  }
-  #music-toggle.show{display:flex}
-  #music-toggle svg{width:20px;height:20px;fill:currentColor}
-  #music-toggle.playing svg{animation:spin 4s linear infinite}
+/* ---------- Botón de música ---------- */
+#music-toggle{
+position:fixed;right:16px;bottom:calc(16px + var(--sab));z-index:60;
+display:none;align-items:center;gap:10px;min-height:48px;padding:12px 18px;
+border:1px solid var(--q300);border-radius:999px;cursor:pointer;color:#fff;
+background:rgba(225,82,111,.95);box-shadow:0 10px 25px rgba(0,0,0,.2);
+font:600 .7rem 'Montserrat',sans-serif;letter-spacing:.1em;text-transform:uppercase;
+}
+#music-toggle.show{display:flex}
+#music-toggle svg{width:20px;height:20px;fill:currentColor}
+#music-toggle.playing svg{animation:spin 4s linear infinite}
+/* Reproductor de YouTube: fuera de pantalla pero activo (necesario en Android) */
+#yt-box{position:fixed;left:-400px;top:0;width:200px;height:113px;opacity:0;pointer-events:none;z-index:-1}
 
-  /* Reproductor de YouTube: fuera de pantalla pero activo (necesario en Android) */
-  #yt-box{position:fixed;left:-400px;top:0;width:200px;height:113px;opacity:0;pointer-events:none;z-index:-1}
+/* ---------- Hero ---------- */
+header.hero{
+position:relative;min-height:100vh;min-height:100svh;
+display:flex;flex-direction:column;align-items:center;justify-content:center;
+text-align:center;padding:calc(40px + var(--sat)) 20px 40px;overflow:hidden;
+}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
+.blob.a{top:-80px;left:-80px;width:290px;height:290px;background:rgba(249,210,217,.7)}
+.blob.b{bottom:-80px;right:-80px;width:320px;height:320px;background:rgba(244,176,189,.5)}
+.hero-inner{position:relative;z-index:2;max-width:720px;width:100%}
+.pill{
+display:inline-block;padding:8px 22px;border-radius:999px;margin-bottom:16px;
+background:rgba(252,231,235,.9);border:1px solid var(--q200);
+font-size:.72rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--q600);
+}
+h1.name{color:var(--q700);line-height:1.05;margin-bottom:6px;font-size:clamp(4rem,17vw,8rem)}
+h1.name small{display:block;color:var(--q600);font-size:.78em;margin-top:-.05em}
+.divider{width:96px;height:2px;border-radius:2px;background:var(--q400);margin:22px auto}
+.song{
+display:inline-flex;align-items:center;gap:8px;margin-bottom:26px;padding:7px 16px;
+background:rgba(255,255,255,.85);border:1px solid var(--q200);border-radius:999px;
+font-size:.75rem;color:var(--muted);max-width:100%;
+}
+.lead{font-size:clamp(1rem,3.8vw,1.2rem);font-weight:300;color:#5d4d53;max-width:540px;margin:0 auto 32px;letter-spacing:.01em}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:440px;margin:0 auto 34px}
+.cd{
+background:rgba(255,255,255,.85);border:1px solid var(--q200);border-radius:18px;
+padding:12px 4px;box-shadow:0 2px 10px rgba(225,82,111,.08);
+}
+.cd b{display:block;font-size:clamp(1.5rem,7vw,2.2rem);color:var(--q700);font-variant-numeric:tabular-nums;line-height:1.2}
+.cd span{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+#cd-done{display:none;font-size:1.1rem;font-weight:600;color:var(--q700);margin-bottom:34px}
+.scroll-link{
+display:inline-flex;flex-direction:column;align-items:center;gap:4px;color:var(--q600);
+font-weight:500;font-size:.9rem;text-decoration:none;letter-spacing:.04em;padding:10px;
+}
+.scroll-link i{font-style:normal;animation:bounce 1.6s infinite}
 
-  /* ---------- Hero ---------- */
-  header.hero{
-    position:relative;min-height:100vh;min-height:100svh;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:calc(40px + var(--sat)) 20px 40px;overflow:hidden;
-  }
-  .blob{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
-  .blob.a{top:-80px;left:-80px;width:290px;height:290px;background:rgba(249,210,217,.7)}
-  .blob.b{bottom:-80px;right:-80px;width:320px;height:320px;background:rgba(244,176,189,.5)}
-  .hero-inner{position:relative;z-index:2;max-width:720px;width:100%}
-  .pill{
-    display:inline-block;padding:8px 22px;border-radius:999px;margin-bottom:16px;
-    background:rgba(252,231,235,.9);border:1px solid var(--q200);
-    font-size:.72rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--q600);
-  }
-  h1.name{color:var(--q700);line-height:1.05;margin-bottom:6px;font-size:clamp(4rem,17vw,8rem)}
-  h1.name small{display:block;color:var(--q600);font-size:.78em;margin-top:-.05em}
-  .divider{width:96px;height:2px;border-radius:2px;background:var(--q400);margin:22px auto}
-  .song{
-    display:inline-flex;align-items:center;gap:8px;margin-bottom:26px;padding:7px 16px;
-    background:rgba(255,255,255,.85);border:1px solid var(--q200);border-radius:999px;
-    font-size:.75rem;color:var(--muted);max-width:100%;
-  }
-  .lead{font-size:clamp(1rem,3.8vw,1.2rem);font-weight:300;color:#5d4d53;max-width:540px;margin:0 auto 32px;letter-spacing:.01em}
+/* ---------- Secciones ---------- */
+section{padding:72px 0}
+.title{color:var(--q700);text-align:center;margin-bottom:40px;font-size:clamp(2.6rem,10vw,3.8rem);line-height:1.15}
+.grid2{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}.btn-row.two{grid-template-columns:1fr}}
+.card{
+position:relative;overflow:hidden;display:flex;flex-direction:column;
+background:rgba(255,255,255,.92);border:1px solid var(--q200);border-radius:var(--radius);
+padding:28px 24px;box-shadow:0 18px 40px rgba(244,176,189,.25);
+transition:border-color .3s, transform .3s;
+}
+.card:hover{border-color:var(--q400)}
+.card::after{
+content:"";position:absolute;top:0;right:0;width:120px;height:120px;
+background:rgba(252,231,235,.7);border-bottom-left-radius:100%;pointer-events:none;
+}
+.card > *{position:relative;z-index:1}
+.ico{
+width:56px;height:56px;border-radius:16px;background:var(--q100);
+display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px;
+}
+.card h3{font-size:1.4rem;font-weight:700;margin-bottom:8px;color:#2e2428}
+.card p.desc{font-size:.92rem;color:var(--muted);margin-bottom:20px}
+.facts{border-top:1px solid var(--q100);padding-top:16px;margin-bottom:22px;display:grid;gap:14px}
+.fact{display:flex;align-items:center;gap:14px}
+.fact .dot{
+flex:none;width:42px;height:42px;border-radius:50%;background:var(--q50);
+display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.fact small{display:block;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:500}
+.fact strong{font-size:1.1rem;color:#2e2428}
+.map{width:100%;height:170px;border:1px solid var(--q200);border-radius:14px;overflow:hidden;margin-bottom:18px;background:var(--q50)}
+.map iframe{width:100%;height:100%;border:0;display:block}
+.card .btn-row{margin-top:auto}
+.band{
+background:linear-gradient(90deg,rgba(252,231,235,.55),var(--q50),rgba(252,231,235,.55));
+border-top:1px solid var(--q200);border-bottom:1px solid var(--q200);
+}
+.mini{align-items:center;text-align:center;padding:30px 24px}
+.mini::after{display:none}
+.mini .ico{border-radius:50%;width:64px;height:64px}
+.tag{
+display:inline-block;padding:7px 16px;border-radius:999px;margin-bottom:14px;
+background:var(--q100);color:var(--q700);font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+}
+.mini p.desc{font-size:.9rem;margin-bottom:0}
 
-  .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:440px;margin:0 auto 34px}
-  .cd{
-    background:rgba(255,255,255,.85);border:1px solid var(--q200);border-radius:18px;
-    padding:12px 4px;box-shadow:0 2px 10px rgba(225,82,111,.08);
-  }
-  .cd b{display:block;font-size:clamp(1.5rem,7vw,2.2rem);color:var(--q700);font-variant-numeric:tabular-nums;line-height:1.2}
-  .cd span{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
-  #cd-done{display:none;font-size:1.1rem;font-weight:600;color:var(--q700);margin-bottom:34px}
+/* ---------- Formulario ---------- */
+.form-card{
+max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--q200);border-radius:var(--radius);
+padding:32px 22px;box-shadow:0 18px 40px rgba(244,176,189,.25);
+}
+@media(min-width:600px){.form-card{padding:44px}}
+.form-card .title{margin-bottom:8px;font-size:clamp(2.2rem,8vw,3.2rem)}
+.sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:28px}
+.sub b{color:#2e2428}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:8px}
+.field input,.field select,.field textarea{
+width:100%;font:400 16px 'Montserrat',sans-serif; /* 16px evita el zoom automático en el celu */
+color:var(--ink);background:var(--q50);border:1.5px solid var(--q200);border-radius:14px;
+padding:14px 16px;min-height:50px;-webkit-appearance:none;appearance:none;
+transition:border-color .2s, box-shadow .2s;
+}
+.field select{
+background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' fill='none' stroke='%23cb3754' stroke-width='2' stroke-linecap='round'/></svg>");
+background-repeat:no-repeat;background-position:right 16px center;padding-right:42px;
+}
+.field textarea{resize:vertical;min-height:96px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--q500);box-shadow:0 0 0 4px var(--q100)}
+.two-col{display:grid;gap:0 16px}
+@media(min-width:600px){.two-col{grid-template-columns:1fr 1fr}}
+.hint{font-size:.78rem;color:var(--soft);text-align:center;margin-top:14px}
+#rsvp-ok{display:none;text-align:center;padding:10px 0}
+#rsvp-ok .big{
+width:68px;height:68px;border-radius:50%;background:var(--q100);display:flex;
+align-items:center;justify-content:center;font-size:32px;margin:0 auto 14px;
+}
+#rsvp-ok h3{font-size:1.5rem;margin-bottom:8px}
+#rsvp-ok p{color:var(--muted);font-size:.92rem;max-width:420px;margin:0 auto 20px}
+#rsvp-ok .btn-row{max-width:360px;margin:0 auto}
+.linkbtn{background:none;border:0;color:var(--q600);font:500 .85rem 'Montserrat',sans-serif;text-decoration:underline;cursor:pointer;margin-top:14px;padding:10px}
 
-  .scroll-link{
-    display:inline-flex;flex-direction:column;align-items:center;gap:4px;color:var(--q600);
-    font-weight:500;font-size:.9rem;text-decoration:none;letter-spacing:.04em;padding:10px;
-  }
-  .scroll-link i{font-style:normal;animation:bounce 1.6s infinite}
+/* ---------- Regalos ---------- */
+.gift-actions{width:100%;margin-top:22px;display:grid;gap:10px;text-align:center}
 
-  /* ---------- Secciones ---------- */
-  section{padding:72px 0}
-  .title{color:var(--q700);text-align:center;margin-bottom:40px;font-size:clamp(2.6rem,10vw,3.8rem);line-height:1.15}
-  .grid2{display:grid;grid-template-columns:1fr;gap:24px}
-  @media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}.btn-row.two{grid-template-columns:1fr}}
+/* ---------- Footer ---------- */
+footer{background:#fff;border-top:1px solid var(--q200);text-align:center;padding:48px 20px;color:var(--soft)}
+footer h2{color:var(--q700);font-size:clamp(2.6rem,9vw,3.4rem);line-height:1.1;margin-bottom:12px}
+footer h2 small{display:block;font-size:.75em;color:var(--q600)}
+footer .when{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px}
+footer .bar{width:48px;height:2px;background:var(--q300);margin:0 auto 20px}
+footer p{font-size:.78rem}
 
-  .card{
-    position:relative;overflow:hidden;display:flex;flex-direction:column;
-    background:rgba(255,255,255,.92);border:1px solid var(--q200);border-radius:var(--radius);
-    padding:28px 24px;box-shadow:0 18px 40px rgba(244,176,189,.25);
-    transition:border-color .3s, transform .3s;
-  }
-  .card:hover{border-color:var(--q400)}
-  .card::after{
-    content:"";position:absolute;top:0;right:0;width:120px;height:120px;
-    background:rgba(252,231,235,.7);border-bottom-left-radius:100%;pointer-events:none;
-  }
-  .card > *{position:relative;z-index:1}
-  .ico{
-    width:56px;height:56px;border-radius:16px;background:var(--q100);
-    display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px;
-  }
-  .card h3{font-size:1.4rem;font-weight:700;margin-bottom:8px;color:#2e2428}
-  .card p.desc{font-size:.92rem;color:var(--muted);margin-bottom:20px}
-  .facts{border-top:1px solid var(--q100);padding-top:16px;margin-bottom:22px;display:grid;gap:14px}
-  .fact{display:flex;align-items:center;gap:14px}
-  .fact .dot{
-    flex:none;width:42px;height:42px;border-radius:50%;background:var(--q50);
-    display:flex;align-items:center;justify-content:center;font-size:18px;
-  }
-  .fact small{display:block;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);font-weight:500}
-  .fact strong{font-size:1.1rem;color:#2e2428}
-  .map{width:100%;height:170px;border:1px solid var(--q200);border-radius:14px;overflow:hidden;margin-bottom:18px;background:var(--q50)}
-  .map iframe{width:100%;height:100%;border:0;display:block}
-  .card .btn-row{margin-top:auto}
+/* ---------- Toast ---------- */
+#toast{
+position:fixed;left:50%;bottom:calc(84px + var(--sab));transform:translate(-50%,20px);z-index:120;
+background:#2e2428;color:#fff;padding:12px 20px;border-radius:12px;font-size:.85rem;
+opacity:0;pointer-events:none;transition:all .3s;max-width:90vw;text-align:center;
+}
+#toast.show{opacity:1;transform:translate(-50%,0)}
 
-  .band{
-    background:linear-gradient(90deg,rgba(252,231,235,.55),var(--q50),rgba(252,231,235,.55));
-    border-top:1px solid var(--q200);border-bottom:1px solid var(--q200);
-  }
-  .mini{align-items:center;text-align:center;padding:30px 24px}
-  .mini::after{display:none}
-  .mini .ico{border-radius:50%;width:64px;height:64px}
-  .tag{
-    display:inline-block;padding:7px 16px;border-radius:999px;margin-bottom:14px;
-    background:var(--q100);color:var(--q700);font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-  }
-  .mini p.desc{font-size:.9rem;margin-bottom:0}
-
-  /* ---------- Formulario ---------- */
-  .form-card{
-    max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--q200);border-radius:var(--radius);
-    padding:32px 22px;box-shadow:0 18px 40px rgba(244,176,189,.25);
-  }
-  @media(min-width:600px){.form-card{padding:44px}}
-  .form-card .title{margin-bottom:8px;font-size:clamp(2.2rem,8vw,3.2rem)}
-  .sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:28px}
-  .sub b{color:#2e2428}
-  .field{margin-bottom:18px}
-  .field label{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:8px}
-  .field input,.field select,.field textarea{
-    width:100%;font:400 16px 'Montserrat',sans-serif; /* 16px evita el zoom automático en el celu */
-    color:var(--ink);background:var(--q50);border:1.5px solid var(--q200);border-radius:14px;
-    padding:14px 16px;min-height:50px;-webkit-appearance:none;appearance:none;
-    transition:border-color .2s, box-shadow .2s;
-  }
-  .field select{
-    background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' fill='none' stroke='%23cb3754' stroke-width='2' stroke-linecap='round'/></svg>");
-    background-repeat:no-repeat;background-position:right 16px center;padding-right:42px;
-  }
-  .field textarea{resize:vertical;min-height:96px}
-  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--q500);box-shadow:0 0 0 4px var(--q100)}
-  .two-col{display:grid;gap:0 16px}
-  @media(min-width:600px){.two-col{grid-template-columns:1fr 1fr}}
-  .hint{font-size:.78rem;color:var(--soft);text-align:center;margin-top:14px}
-  #rsvp-ok{display:none;text-align:center;padding:10px 0}
-  #rsvp-ok .big{
-    width:68px;height:68px;border-radius:50%;background:var(--q100);display:flex;
-    align-items:center;justify-content:center;font-size:32px;margin:0 auto 14px;
-  }
-  #rsvp-ok h3{font-size:1.5rem;margin-bottom:8px}
-  #rsvp-ok p{color:var(--muted);font-size:.92rem;max-width:420px;margin:0 auto 20px}
-  #rsvp-ok .btn-row{max-width:360px;margin:0 auto}
-  .linkbtn{background:none;border:0;color:var(--q600);font:500 .85rem 'Montserrat',sans-serif;text-decoration:underline;cursor:pointer;margin-top:14px;padding:10px}
-
-  /* ---------- Regalos / pagos ---------- */
-  .gift-actions{width:100%;margin-top:22px;display:grid;gap:10px;text-align:center}
-  .btn.mp{background:#ffe600;color:#2d3277;box-shadow:0 8px 20px rgba(255,230,0,.35)}
-  .btn.mp:hover{background:#f5dc00}
-  .btn.mp img{height:26px;width:auto;display:block}
-
-  /* ---------- Footer ---------- */
-  footer{background:#fff;border-top:1px solid var(--q200);text-align:center;padding:48px 20px;color:var(--soft)}
-  footer h2{color:var(--q700);font-size:clamp(2.6rem,9vw,3.4rem);line-height:1.1;margin-bottom:12px}
-  footer h2 small{display:block;font-size:.75em;color:var(--q600)}
-  footer .when{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px}
-  footer .bar{width:48px;height:2px;background:var(--q300);margin:0 auto 20px}
-  footer p{font-size:.78rem}
-
-  /* ---------- Toast ---------- */
-  #toast{
-    position:fixed;left:50%;bottom:calc(84px + var(--sab));transform:translate(-50%,20px);z-index:120;
-    background:#2e2428;color:#fff;padding:12px 20px;border-radius:12px;font-size:.85rem;
-    opacity:0;pointer-events:none;transition:all .3s;max-width:90vw;text-align:center;
-  }
-  #toast.show{opacity:1;transform:translate(-50%,0)}
-
-  /* ---------- Animaciones ---------- */
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
-  .reveal.in{opacity:1;transform:none}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
-  @media(prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important}
-    .reveal{opacity:1;transform:none}
-    html{scroll-behavior:auto}
-  }
+/* ---------- Animaciones ---------- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@media(prefers-reduced-motion:reduce){
+*{animation:none!important;transition:none!important}
+.reveal{opacity:1;transform:none}
+html{scroll-behavior:auto}
+}
 </style>
 </head>
-
 <body>
 
 <!-- Reproductor (oculto fuera de pantalla) -->
@@ -265,178 +255,158 @@
 
 <!-- Pantalla de bienvenida (también sirve para habilitar el audio en el celular) -->
 <div id="welcome" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
-  <div class="welcome-card">
-    <div class="welcome-icon" aria-hidden="true">💌</div>
-    <h3 id="welcome-title" class="script">¡Bienvenido/a!</h3>
-    <p>Te invito a compartir un momento muy especial</p>
-    <button class="btn" id="enter-btn" type="button">Ver invitación</button>
-  </div>
+<div class="welcome-card">
+<div class="welcome-icon" aria-hidden="true">💌</div>
+<h3 id="welcome-title" class="script">¡Bienvenido/a!</h3>
+<p>Te invito a compartir un momento muy especial</p>
+<button class="btn" id="enter-btn" type="button">Ver invitación</button>
+</div>
 </div>
 
 <!-- Control de música -->
 <button id="music-toggle" type="button" aria-label="Pausar música">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
-  <span id="music-text">Pausar</span>
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+<span id="music-text">Pausar</span>
 </button>
 
 <!-- Portada -->
 <header class="hero">
-  <div class="blob a"></div><div class="blob b"></div>
-  <div class="hero-inner">
-    <span class="pill">Mis 15 Años</span>
-    <h1 class="name script"><span>Virginia</span><small>Di Bella</small></h1>
-    <div class="divider"></div>
-
-    <div class="song"><span aria-hidden="true">🎧</span><span>Tema: <strong>The Police · Every Breath You Take</strong></span></div>
-
-    <p class="lead">Hay momentos en la vida que son inolvidables, y compartirlos con quienes más amamos los hace eternos.</p>
-
-    <div class="countdown" id="countdown" role="timer" aria-label="Cuenta regresiva">
-      <div class="cd"><b id="d">00</b><span>Días</span></div>
-      <div class="cd"><b id="h">00</b><span>Horas</span></div>
-      <div class="cd"><b id="m">00</b><span>Min</span></div>
-      <div class="cd"><b id="s">00</b><span>Seg</span></div>
-    </div>
-    <p id="cd-done">¡La fiesta ya comenzó! 🎉</p>
-
-    <a class="scroll-link" href="#detalles"><span>Ver detalles</span><i aria-hidden="true">⌄</i></a>
-  </div>
+<div class="blob a"></div><div class="blob b"></div>
+<div class="hero-inner">
+<span class="pill">Mis 15 Años</span>
+<h1 class="name script"><span>Virginia</span><small>Di Bella</small></h1>
+<div class="divider"></div>
+<div class="song"><span aria-hidden="true">🎧</span><span>Tema: <strong>The Police · Every Breath You Take</strong></span></div>
+<p class="lead">Hay momentos en la vida que son inolvidables, y compartirlos con quienes más amamos los hace eternos.</p>
+<div class="countdown" id="countdown" role="timer" aria-label="Cuenta regresiva">
+<div class="cd"><b id="d">00</b><span>Días</span></div>
+<div class="cd"><b id="h">00</b><span>Horas</span></div>
+<div class="cd"><b id="m">00</b><span>Min</span></div>
+<div class="cd"><b id="s">00</b><span>Seg</span></div>
+</div>
+<p id="cd-done">¡La fiesta ya comenzó! 🎉</p>
+<a class="scroll-link" href="#detalles"><span>Ver detalles</span><i aria-hidden="true">⌄</i></a>
+</div>
 </header>
 
 <!-- Detalles -->
 <section id="detalles">
-  <div class="wrap">
-    <h2 class="title script reveal">Cuándo &amp; Dónde</h2>
+<div class="wrap">
+<h2 class="title script reveal">Cuándo &amp; Dónde</h2>
+<div class="grid2">
+<article class="card reveal">
+<div class="ico" aria-hidden="true">📅</div>
+<h3>Fecha y horario</h3>
+<p class="desc">Te esperamos para compartir una noche mágica e inolvidable.</p>
+<div class="facts">
+<div class="fact"><div class="dot" aria-hidden="true">🌙</div>
+<div><small>Fecha</small><strong>Sábado 21 de noviembre</strong></div></div>
+<div class="fact"><div class="dot" aria-hidden="true">🕘</div>
+<div><small>Horario</small><strong>21:00 hs a 05:00 hs</strong></div></div>
+</div>
+<div class="btn-row">
+<button class="btn" type="button" id="cal-ics">Agendar en mi calendario</button>
+<button class="btn ghost" type="button" id="cal-google">Abrir en Google Calendar</button>
+</div>
+</article>
 
-    <div class="grid2">
-      <article class="card reveal">
-        <div class="ico" aria-hidden="true">📅</div>
-        <h3>Fecha y horario</h3>
-        <p class="desc">Te esperamos para compartir una noche mágica e inolvidable.</p>
-        <div class="facts">
-          <div class="fact"><div class="dot" aria-hidden="true">🌙</div>
-            <div><small>Fecha</small><strong>Sábado 21 de noviembre</strong></div></div>
-          <div class="fact"><div class="dot" aria-hidden="true">🕘</div>
-            <div><small>Horario</small><strong>21:00 hs a 05:00 hs</strong></div></div>
-        </div>
-        <div class="btn-row">
-          <button class="btn" type="button" id="cal-ics">Agendar en mi calendario</button>
-          <button class="btn ghost" type="button" id="cal-google">Abrir en Google Calendar</button>
-        </div>
-      </article>
-
-      <article class="card reveal">
-        <div class="ico" aria-hidden="true">📍</div>
-        <h3>Salón Reymi</h3>
-        <p class="desc">Un lugar especial donde nos reuniremos para crear recuerdos inolvidables.</p>
-        <div class="facts">
-          <div class="fact"><div class="dot" aria-hidden="true">🏠</div>
-            <div><small>Dirección</small><strong>Las Heras 623</strong></div></div>
-        </div>
-        <div class="map">
-          <iframe title="Mapa del Salón Reymi"
-            src="https://maps.google.com/maps?q=Sal%C3%B3n%20Reymi%20Las%20Heras%20623&z=15&output=embed"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-        </div>
-        <div class="btn-row">
-          <a class="btn dark" id="map-link" target="_blank" rel="noopener noreferrer"
-             href="https://www.google.com/maps/search/?api=1&query=Sal%C3%B3n%20Reymi%20Las%20Heras%20623">Cómo llegar</a>
-        </div>
-      </article>
-    </div>
-  </div>
+<article class="card reveal">
+<div class="ico" aria-hidden="true">📍</div>
+<h3>Salón Reymi</h3>
+<p class="desc">Un lugar especial donde nos reuniremos para crear recuerdos inolvidables.</p>
+<div class="facts">
+<div class="fact"><div class="dot" aria-hidden="true">🏠</div>
+<div><small>Dirección</small><strong>Las Heras 623</strong></div></div>
+</div>
+<div class="map">
+<iframe title="Mapa del Salón Reymi"
+src="https://maps.google.com/maps?q=Sal%C3%B3n%20Reymi%20Las%20Heras%20623&z=15&output=embed"
+loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+</div>
+<div class="btn-row">
+<a class="btn dark" id="map-link" target="_blank" rel="noopener noreferrer"
+href="https://www.google.com/maps/search/?api=1&query=Sal%C3%B3n%20Reymi%20Las%20Heras%20623">Cómo llegar</a>
+</div>
+</article>
+</div>
+</div>
 </section>
 
 <!-- Dress code y regalos -->
 <section class="band" style="padding:56px 0">
-  <div class="wrap">
-    <div class="grid2">
-      <article class="card mini reveal">
-        <div class="ico" aria-hidden="true">👗</div>
-        <h3>Elegante sport</h3>
-        <span class="tag">Evitar el blanco</span>
-        <p class="desc">Venite arreglado y listo para disfrutar toda la noche. El blanco queda reservado para la cumpleañera.</p>
-      </article>
-      <article class="card mini reveal">
-        <div class="ico" aria-hidden="true">🎁</div>
-        <h3>Regalos</h3>
-        <span class="tag">Tu presencia es lo más importante</span>
-        <p class="desc">Lo que más me importa es que estés conmigo en esta noche tan especial. Si querés tener un detalle, habrá una urna en el salón.</p>
-        <div class="gift-actions">
-          <button class="btn" type="button" id="copy-alias">Copiar alias.</button>
-          <a class="btn mp" id="mp-pay" href="#" target="_blank" rel="noopener noreferrer">
-            <img src="mercadopago.png" alt="" onerror="this.remove()">
-            <span></span>
-          </a>
-        </div>
-      </article>
-    </div>
+<div class="wrap">
+<div class="grid2">
+<article class="card mini reveal">
+<div class="ico" aria-hidden="true">👗</div>
+<h3>Elegante sport</h3>
+<p class="desc">Venite arreglado y listo para disfrutar toda la noche.</p>
+</article>
 
-    <article class="card mini reveal" style="margin-top:24px">
-      <div class="ico" aria-hidden="true">🎉</div>
-      <h3>Ya confirmaron</h3>
-      <div id="conf-num" class="script" style="font-size:4.2rem;line-height:1;color:var(--q700)">0</div>
-      <span class="tag" id="conf-label" style="margin-top:10px">personas</span>
-      <p class="desc" id="conf-desc">¡Se viene una noche inolvidable!</p>
-    </article>
-  </div>
+<article class="card mini reveal">
+<div class="ico" aria-hidden="true">🎁</div>
+<h3>Regalos</h3>
+<span class="tag">Tu presencia es lo más importante</span>
+<p class="desc">Lo que más me importa es que estés conmigo en esta noche tan especial. Si querés tener un detalle, habrá una urna en el salón.</p>
+<div class="gift-actions">
+<button class="btn" type="button" id="copy-alias">Copiar alias.</button>
+</div>
+</article>
+</div>
+</div>
 </section>
 
 <!-- Confirmación -->
 <section id="confirmar">
-  <div class="wrap">
-    <div class="form-card reveal">
-      <h2 class="title script">Confirmá tu asistencia</h2>
-      <p class="sub">Por favor confirmá antes del <b>1 de noviembre</b></p>
+<div class="wrap">
+<div class="form-card reveal">
+<h2 class="title script">Confirmá tu asistencia</h2>
+<p class="sub">Por favor confirmá antes del <b>1 de noviembre</b></p>
 
-      <form id="rsvp-form" novalidate>
-        <div class="field">
-          <label for="nombre">Nombre y apellido</label>
-          <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Ej: Martina González" required>
-        </div>
+<form id="rsvp-form" novalidate>
+<div class="field">
+<label for="nombre">Nombre y apellido</label>
+<input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Ej: Martina González" required>
+</div>
+<div class="two-col">
+<div class="field">
+<label for="asistencia">¿Asistís?</label>
+<select id="asistencia">
+<option value="si">¡Sí, ahí estaré!</option>
+<option value="no">No podré asistir</option>
+</select>
+</div>
+<div class="field">
+<label for="dieta">Restricción alimentaria</label>
+<input id="dieta" type="text" placeholder="Celíaco, vegetariano, ninguna…">
+</div>
+</div>
+<div class="field">
+<label for="mensaje">Mensaje para Virginia (opcional)</label>
+<textarea id="mensaje" rows="3" placeholder="Dejale un lindo saludo…"></textarea>
+</div>
+<button class="btn" type="submit">Enviar por WhatsApp</button>
+<p class="hint">Se abrirá WhatsApp con tu respuesta lista para enviar.</p>
+</form>
 
-        <div class="two-col">
-          <div class="field">
-            <label for="asistencia">¿Asistís?</label>
-            <select id="asistencia">
-              <option value="si">¡Sí, ahí estaré!</option>
-              <option value="no">No podré asistir</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="dieta">Restricción alimentaria</label>
-            <input id="dieta" type="text" placeholder="Celíaco, vegetariano, ninguna…">
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="mensaje">Mensaje para Virginia (opcional)</label>
-          <textarea id="mensaje" rows="3" placeholder="Dejale un lindo saludo…"></textarea>
-        </div>
-
-        <button class="btn" type="submit">Enviar por WhatsApp</button>
-        <p class="hint">Se abrirá WhatsApp con tu respuesta lista para enviar.</p>
-      </form>
-
-      <div id="rsvp-ok" aria-live="polite">
-        <div class="big" aria-hidden="true">💖</div>
-        <h3>¡Muchas gracias!</h3>
-        <p id="ok-text"></p>
-        <div class="btn-row">
-          <a class="btn" id="wa-again" target="_blank" rel="noopener noreferrer" href="#">Abrir WhatsApp de nuevo</a>
-          <button class="btn ghost" type="button" id="copy-msg">Copiar mensaje</button>
-        </div>
-        <button class="linkbtn" type="button" id="reset-btn">Enviar otra respuesta</button>
-      </div>
-    </div>
-  </div>
+<div id="rsvp-ok" aria-live="polite">
+<div class="big" aria-hidden="true">💖</div>
+<h3>¡Muchas gracias!</h3>
+<p id="ok-text"></p>
+<div class="btn-row">
+<a class="btn" id="wa-again" target="_blank" rel="noopener noreferrer" href="#">Abrir WhatsApp de nuevo</a>
+<button class="btn ghost" type="button" id="copy-msg">Copiar mensaje</button>
+</div>
+<button class="linkbtn" type="button" id="reset-btn">Enviar otra respuesta</button>
+</div>
+</div>
+</div>
 </section>
 
 <footer>
-  <h2 class="script"><span>Virginia</span><small>Di Bella</small></h2>
-  <p class="when">21 de noviembre · Salón Reymi</p>
-  <div class="bar"></div>
-  <p>No faltes a esta noche inolvidable.</p>
+<h2 class="script"><span>Virginia</span><small>Di Bella</small></h2>
+<p class="when">21 de noviembre · Salón Reymi</p>
+<div class="bar"></div>
+<p>No faltes a esta noche inolvidable.</p>
 </footer>
 
 <div id="toast" role="status"></div>
@@ -447,29 +417,26 @@
 // Ejemplo Argentina celular: "5491155551234". Si lo dejás vacío, WhatsApp te deja elegir el contacto.
 const WHATSAPP_NUMBER = "5491122340951";
 
-// Alias para transferencias y link de pago de Mercado Pago.
+// Alias para transferencias.
 const ALIAS = "virginia.dibe";
-// Pegá acá tu link de pago de Mercado Pago (ej: "https://mpago.li/xxxxxxx"). Si queda vacío,
-// el botón amarillo copia el alias y abre Mercado Pago para que transfieran.
-const MP_LINK = "";
 
-// URL de la planilla de Google (Apps Script). Con esto las confirmaciones se guardan solas
-// y el contador "Ya confirmaron" se actualiza solo. Mirá el archivo confirmaciones_apps_script.gs
+// URL de la planilla de Google (Apps Script). Con esto las confirmaciones se guardan solas.
+// Mirá el archivo confirmaciones_apps_script.gs
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbzAS4SfIDWn8w_Kq833tSOamxVFr9cZyfjdv9yBOOeAmQYvlkcersPEcf-zYnE2CYotAg/exec";
-// Se usa SOLO si SHEET_URL está vacío: número que ves en el contador (se cambia a mano).
-const CONFIRMADOS = 0;
 
 const EVENT = {
-  title: "Mis 15 de Virginia Di Bella",
-  place: "Salón Reymi, Las Heras 623",
-  details: "Te esperamos en el Salón Reymi para celebrar los 15 años de Virginia. Dress code: elegante sport (evitar el blanco).",
-  start: "2026-11-21T21:00:00-03:00",   // hora de Argentina
-  end:   "2026-11-22T05:00:00-03:00",
-  icsStart: "20261121T210000",
-  icsEnd:   "20261122T050000",
-  tz: "America/Argentina/Buenos_Aires"
+title: "Mis 15 de Virginia Di Bella",
+place: "Salón Reymi, Las Heras 623",
+details: "Te esperamos en el Salón Reymi para celebrar los 15 años de Virginia. Dress code: elegante sport.",
+start: "2026-11-21T21:00:00-03:00", // hora de Argentina
+end: "2026-11-22T05:00:00-03:00",
+icsStart: "20261121T210000",
+icsEnd: "20261122T050000",
+tz: "America/Argentina/Buenos_Aires"
 };
+
 const YT_VIDEO_ID = "OMOGaugKpzs";
+
 // Opcional y recomendado: poné un archivo MP3 con la canción en la misma carpeta que este HTML
 // con el nombre musica.mp3. Si existe, suena SIEMPRE (también abriendo el archivo directo en la PC).
 // Si no existe, se usa YouTube.
@@ -478,75 +445,79 @@ const AUDIO_FILE = encodeURI("The Police - Every Breath You Take.mp3");
 /* ================= Utilidades ================= */
 const $ = id => document.getElementById(id);
 function toast(msg){
-  const t = $('toast'); t.textContent = msg; t.classList.add('show');
-  clearTimeout(toast._t); toast._t = setTimeout(()=>t.classList.remove('show'), 2600);
+const t = $('toast'); t.textContent = msg; t.classList.add('show');
+clearTimeout(toast._t); toast._t = setTimeout(()=>t.classList.remove('show'), 2600);
 }
 
 /* ================= Música (YouTube) ================= */
 let player = null, ready = false, playing = false, wantPlay = false, ytFailed = false;
 
 function loadYT(){
-  const s = document.createElement('script');
-  s.src = "https://www.youtube.com/iframe_api";
-  s.onerror = () => { ytFailed = true; };
-  document.head.appendChild(s);
+const s = document.createElement('script');
+s.src = "https://www.youtube.com/iframe_api";
+s.onerror = () => { ytFailed = true; };
+document.head.appendChild(s);
 }
 window.onYouTubeIframeAPIReady = function(){
-  player = new YT.Player('yt-player', {
-    width: '200', height: '113', videoId: YT_VIDEO_ID,
-    playerVars: { controls:0, disablekb:1, fs:0, modestbranding:1, playsinline:1, rel:0, loop:1, playlist:YT_VIDEO_ID },
-    events: {
-      onReady: () => { ready = true; if (wantPlay) play(); },
-      onStateChange: e => {
-        if (e.data === YT.PlayerState.PLAYING){ playing = true; ui(); }
-        else if (e.data === YT.PlayerState.PAUSED){ playing = false; ui(); }
-        else if (e.data === YT.PlayerState.ENDED){ player.playVideo(); }
-      },
-      onError: () => { ytFailed = true; ui(); toast('YouTube no permitió reproducir acá. Tocá el botón para escucharla en YouTube.'); }
-    }
-  });
+player = new YT.Player('yt-player', {
+width: '200', height: '113', videoId: YT_VIDEO_ID,
+playerVars: { controls:0, disablekb:1, fs:0, modestbranding:1, playsinline:1, rel:0, loop:1, playlist:YT_VIDEO_ID },
+events: {
+onReady: () => { ready = true; if (wantPlay) play(); },
+onStateChange: e => {
+if (e.data === YT.PlayerState.PLAYING){ playing = true; ui(); }
+else if (e.data === YT.PlayerState.PAUSED){ playing = false; ui(); }
+else if (e.data === YT.PlayerState.ENDED){ player.playVideo(); }
+},
+onError: () => { ytFailed = true; ui(); toast('YouTube no permitió reproducir acá. Tocá el botón para escucharla en YouTube.'); }
+}
+});
 };
+
 // Audio local (musica.mp3). Si falla o no existe, se pasa a YouTube.
 let audio = null;
 if (AUDIO_FILE){
-  audio = new Audio(AUDIO_FILE); audio.loop = true; audio.preload = 'auto';
-  audio.addEventListener('play',  () => { playing = true;  ui(); });
-  audio.addEventListener('pause', () => { playing = false; ui(); });
-  audio.addEventListener('error', () => { audio = null; if (wantPlay) play(); });
+audio = new Audio(AUDIO_FILE); audio.loop = true; audio.preload = 'auto';
+audio.addEventListener('play', () => { playing = true; ui(); });
+audio.addEventListener('pause', () => { playing = false; ui(); });
+audio.addEventListener('error', () => { audio = null; if (wantPlay) play(); });
 }
+
 function play(){
-  wantPlay = true;
-  if (audio){ audio.play().catch(() => { audio = null; play(); }); return; }
-  if (ready && player){ player.unMute(); player.setVolume(100); player.playVideo(); }
-  clearTimeout(play._t);
-  play._t = setTimeout(() => { if (!playing){ ytFailed = true; ui(); } }, 4000);
+wantPlay = true;
+if (audio){ audio.play().catch(() => { audio = null; play(); }); return; }
+if (ready && player){ player.unMute(); player.setVolume(100); player.playVideo(); }
+clearTimeout(play._t);
+play._t = setTimeout(() => { if (!playing){ ytFailed = true; ui(); } }, 4000);
 }
 function pause(){ wantPlay = false; if (audio) audio.pause(); else if (ready && player) player.pauseVideo(); }
+
 function ui(){
-  const b = $('music-toggle');
-  b.classList.toggle('playing', playing);
-  if (playing) ytFailed = false;
-  $('music-text').textContent = playing ? 'Pausar' : (ytFailed && !audio ? 'Escuchar en YouTube' : 'Música');
-  b.setAttribute('aria-label', playing ? 'Pausar música' : 'Reproducir música');
+const b = $('music-toggle');
+b.classList.toggle('playing', playing);
+if (playing) ytFailed = false;
+$('music-text').textContent = playing ? 'Pausar' : (ytFailed && !audio ? 'Escuchar en YouTube' : 'Música');
+b.setAttribute('aria-label', playing ? 'Pausar música' : 'Reproducir música');
 }
+
 $('music-toggle').addEventListener('click', () => {
-  if (playing){ pause(); return; }
-  if (ytFailed && !audio){ window.open('https://www.youtube.com/watch?v=' + YT_VIDEO_ID, '_blank', 'noopener'); return; }
-  play();
+if (playing){ pause(); return; }
+if (ytFailed && !audio){ window.open('https://www.youtube.com/watch?v=' + YT_VIDEO_ID, '_blank', 'noopener'); return; }
+play();
 });
 
 // Pausar si se cierra la pestaña/app y retomar al volver
 document.addEventListener('visibilitychange', () => {
-  if (!ready || !player) return;
-  if (document.hidden && playing){ player.pauseVideo(); wantPlay = true; }
-  else if (!document.hidden && wantPlay){ player.playVideo(); }
+if (!ready || !player) return;
+if (document.hidden && playing){ player.pauseVideo(); wantPlay = true; }
+else if (!document.hidden && wantPlay){ player.playVideo(); }
 });
 
 $('enter-btn').addEventListener('click', () => {
-  $('welcome').classList.add('hide');
-  $('music-toggle').classList.add('show');
-  wantPlay = true; play();
-  document.body.style.overflow = '';
+$('welcome').classList.add('hide');
+$('music-toggle').classList.add('show');
+wantPlay = true; play();
+document.body.style.overflow = '';
 });
 document.body.style.overflow = 'hidden';
 loadYT();
@@ -555,158 +526,135 @@ loadYT();
 const target = new Date(EVENT.start).getTime();
 const endT = new Date(EVENT.end).getTime();
 function tick(){
-  const diff = target - Date.now();
-  if (diff <= 0){
-    $('countdown').style.display = 'none';
-    $('cd-done').style.display = 'block';
-    $('cd-done').textContent = Date.now() < endT ? '¡La fiesta ya comenzó! 🎉' : '¡Gracias por acompañarme! 💖';
-    return;
-  }
-  const p = n => String(n).padStart(2,'0');
-  $('d').textContent = p(Math.floor(diff/864e5));
-  $('h').textContent = p(Math.floor(diff%864e5/36e5));
-  $('m').textContent = p(Math.floor(diff%36e5/6e4));
-  $('s').textContent = p(Math.floor(diff%6e4/1e3));
+const diff = target - Date.now();
+if (diff <= 0){
+$('countdown').style.display = 'none';
+$('cd-done').style.display = 'block';
+$('cd-done').textContent = Date.now() < endT ? '¡La fiesta ya comenzó! 🎉' : '¡Gracias por acompañarme! 💖';
+return;
+}
+const p = n => String(n).padStart(2,'0');
+$('d').textContent = p(Math.floor(diff/864e5));
+$('h').textContent = p(Math.floor(diff%864e5/36e5));
+$('m').textContent = p(Math.floor(diff%36e5/6e4));
+$('s').textContent = p(Math.floor(diff%6e4/1e3));
 }
 tick(); setInterval(tick, 1000);
 
-// Contador de confirmados (se lee de la planilla de Google si SHEET_URL está cargada)
-function showCount(n){
-  $('conf-num').textContent = n;
-  $('conf-label').textContent = n === 1 ? 'persona' : 'personas';
-  $('conf-desc').textContent = n === 0 ? '¡Sé la primera persona en confirmar!' : '¡Se viene una noche inolvidable!';
-}
-function loadCount(){
-  if (!SHEET_URL) return;
-  fetch(SHEET_URL + (SHEET_URL.includes('?') ? '&' : '?') + 't=' + Date.now())
-    .then(r => r.json())
-    .then(d => { if (d && typeof d.count === 'number') showCount(d.count); })
-    .catch(() => {});
-}
-showCount(CONFIRMADOS);
-loadCount();
-document.addEventListener('visibilitychange', () => { if (!document.hidden) loadCount(); });
-
 // Guarda la confirmación en la planilla (en segundo plano, sin frenar la apertura de WhatsApp)
 function sendToSheet(d){
-  if (!SHEET_URL) return;
-  try { fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', keepalive: true, body: new URLSearchParams(d) }); } catch (e) {}
+if (!SHEET_URL) return;
+try { fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', keepalive: true, body: new URLSearchParams(d) }); } catch (e) {}
 }
 
-/* ================= Alias y Mercado Pago ================= */
+/* ================= Alias ================= */
 async function copyText(t){
-  try { await navigator.clipboard.writeText(t); return true; }
-  catch (_) {
-    try {
-      const ta = document.createElement('textarea'); ta.value = t; ta.style.cssText = 'position:fixed;opacity:0';
-      document.body.appendChild(ta); ta.select(); const ok = document.execCommand('copy'); ta.remove(); return ok;
-    } catch (__) { return false; }
-  }
+try { await navigator.clipboard.writeText(t); return true; }
+catch (_) {
+try {
+const ta = document.createElement('textarea'); ta.value = t; ta.style.cssText = 'position:fixed;opacity:0';
+document.body.appendChild(ta); ta.select(); const ok = document.execCommand('copy'); ta.remove(); return ok;
+} catch (__) { return false; }
+}
 }
 $('copy-alias').addEventListener('click', async () => {
-  toast(await copyText(ALIAS) ? 'Alias copiado: ' + ALIAS : 'El alias es: ' + ALIAS);
-});
-if (MP_LINK) $('mp-pay').href = MP_LINK;
-$('mp-pay').addEventListener('click', async e => {
-  if (MP_LINK) return;
-  e.preventDefault();
-  await copyText(ALIAS);
-  toast('Alias copiado. Pegalo en "Transferir" dentro de Mercado Pago');
-  window.open('https://www.mercadopago.com.ar/', '_blank', 'noopener');
+toast(await copyText(ALIAS) ? 'Alias copiado: ' + ALIAS : 'El alias es: ' + ALIAS);
 });
 
 /* ================= Calendario ================= */
 $('cal-google').addEventListener('click', () => {
-  const u = new URL('https://calendar.google.com/calendar/render');
-  u.searchParams.set('action','TEMPLATE');
-  u.searchParams.set('text', EVENT.title);
-  u.searchParams.set('details', EVENT.details);
-  u.searchParams.set('location', EVENT.place);
-  u.searchParams.set('dates', EVENT.icsStart + '/' + EVENT.icsEnd);
-  u.searchParams.set('ctz', EVENT.tz);
-  window.open(u.toString(), '_blank', 'noopener');
+const u = new URL('https://calendar.google.com/calendar/render');
+u.searchParams.set('action','TEMPLATE');
+u.searchParams.set('text', EVENT.title);
+u.searchParams.set('details', EVENT.details);
+u.searchParams.set('location', EVENT.place);
+u.searchParams.set('dates', EVENT.icsStart + '/' + EVENT.icsEnd);
+u.searchParams.set('ctz', EVENT.tz);
+window.open(u.toString(), '_blank', 'noopener');
 });
 
 // Archivo .ics: funciona con el calendario de Android, iPhone, Outlook y Windows
 $('cal-ics').addEventListener('click', () => {
-  const ics = [
-    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Invitacion 15 Virginia//ES','CALSCALE:GREGORIAN','METHOD:PUBLISH',
-    'BEGIN:VEVENT',
-    'UID:15-virginia-di-bella-20261121@invitacion',
-    'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z',
-    'DTSTART;TZID=' + EVENT.tz + ':' + EVENT.icsStart,
-    'DTEND;TZID=' + EVENT.tz + ':' + EVENT.icsEnd,
-    'SUMMARY:' + EVENT.title,
-    'LOCATION:' + EVENT.place,
-    'DESCRIPTION:' + EVENT.details,
-    'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Mañana son los 15 de Virginia','END:VALARM',
-    'END:VEVENT','END:VCALENDAR'
-  ].join('\r\n');
-  const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob); a.download = 'mis-15-virginia.ics';
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
-  toast('Abrí el archivo descargado para agendarlo');
+const ics = [
+'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Invitacion 15 Virginia//ES','CALSCALE:GREGORIAN','METHOD:PUBLISH',
+'BEGIN:VEVENT',
+'UID:15-virginia-di-bella-20261121@invitacion',
+'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z',
+'DTSTART;TZID=' + EVENT.tz + ':' + EVENT.icsStart,
+'DTEND;TZID=' + EVENT.tz + ':' + EVENT.icsEnd,
+'SUMMARY:' + EVENT.title,
+'LOCATION:' + EVENT.place,
+'DESCRIPTION:' + EVENT.details,
+'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Mañana son los 15 de Virginia','END:VALARM',
+'END:VEVENT','END:VCALENDAR'
+].join('\r\n');
+const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+const a = document.createElement('a');
+a.href = URL.createObjectURL(blob); a.download = 'mis-15-virginia.ics';
+document.body.appendChild(a); a.click(); a.remove();
+setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+toast('Abrí el archivo descargado para agendarlo');
 });
 
 /* ================= Confirmación por WhatsApp ================= */
 let lastMsg = '';
 function buildMessage(){
-  const nombre = $('nombre').value.trim();
-  const va = $('asistencia').value === 'si';
-  const dieta = $('dieta').value.trim();
-  const msj = $('mensaje').value.trim();
-  let t = va
-    ? `¡Hola Virginia! Soy ${nombre} y confirmo que voy a tus 15 el 21 de noviembre. 🎉`
-    : `¡Hola Virginia! Soy ${nombre} y lamentablemente no voy a poder ir a tus 15. ¡Gracias por invitarme! 💖`;
-  if (va && dieta) t += `\nRestricción alimentaria: ${dieta}`;
-  if (msj) t += `\n\n"${msj}"`;
-  return t;
+const nombre = $('nombre').value.trim();
+const va = $('asistencia').value === 'si';
+const dieta = $('dieta').value.trim();
+const msj = $('mensaje').value.trim();
+let t = va
+? `¡Hola Virginia! Soy ${nombre} y confirmo que voy a tus 15 el 21 de noviembre. 🎉`
+: `¡Hola Virginia! Soy ${nombre} y lamentablemente no voy a poder ir a tus 15. ¡Gracias por invitarme! 💖`;
+if (va && dieta) t += `\nRestricción alimentaria: ${dieta}`;
+if (msj) t += `\n\n"${msj}"`;
+return t;
 }
 function waUrl(text){
-  const base = WHATSAPP_NUMBER ? `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g,'')}` : 'https://wa.me/';
-  return `${base}?text=${encodeURIComponent(text)}`;
+const base = WHATSAPP_NUMBER ? `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g,'')}` : 'https://wa.me/';
+return `${base}?text=${encodeURIComponent(text)}`;
 }
+
 $('rsvp-form').addEventListener('submit', e => {
-  e.preventDefault();
-  const n = $('nombre');
-  if (!n.value.trim()){ n.focus(); n.style.borderColor = 'var(--q600)'; toast('Escribí tu nombre y apellido'); return; }
-  n.style.borderColor = '';
-  lastMsg = buildMessage();
-  const url = waUrl(lastMsg);
-  const va = $('asistencia').value === 'si';
-  $('ok-text').textContent = va
-    ? `¡Gracias ${n.value.trim()}! Si WhatsApp no se abrió solo, tocá el botón de abajo y enviá el mensaje.`
-    : `Hola ${n.value.trim()}, ¡gracias por avisarnos! Si WhatsApp no se abrió, tocá el botón de abajo para enviar el mensaje.`;
-  $('wa-again').href = url;
-  sendToSheet({ nombre: n.value.trim(), asistencia: va ? 'si' : 'no', dieta: $('dieta').value.trim(), mensaje: $('mensaje').value.trim() });
-  $('rsvp-form').style.display = 'none';
-  $('rsvp-ok').style.display = 'block';
-  window.open(url, '_blank', 'noopener');
+e.preventDefault();
+const n = $('nombre');
+if (!n.value.trim()){ n.focus(); n.style.borderColor = 'var(--q600)'; toast('Escribí tu nombre y apellido'); return; }
+n.style.borderColor = '';
+lastMsg = buildMessage();
+const url = waUrl(lastMsg);
+const va = $('asistencia').value === 'si';
+$('ok-text').textContent = va
+? `¡Gracias ${n.value.trim()}! Si WhatsApp no se abrió solo, tocá el botón de abajo y enviá el mensaje.`
+: `Hola ${n.value.trim()}, ¡gracias por avisarnos! Si WhatsApp no se abrió, tocá el botón de abajo para enviar el mensaje.`;
+$('wa-again').href = url;
+sendToSheet({ nombre: n.value.trim(), asistencia: va ? 'si' : 'no', dieta: $('dieta').value.trim(), mensaje: $('mensaje').value.trim() });
+$('rsvp-form').style.display = 'none';
+$('rsvp-ok').style.display = 'block';
+window.open(url, '_blank', 'noopener');
 });
 
 $('copy-msg').addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(lastMsg); toast('Mensaje copiado'); }
-  catch { 
-    const ta = document.createElement('textarea'); ta.value = lastMsg; document.body.appendChild(ta);
-    ta.select(); try{ document.execCommand('copy'); toast('Mensaje copiado'); }catch{ toast('No se pudo copiar'); } ta.remove();
-  }
+try { await navigator.clipboard.writeText(lastMsg); toast('Mensaje copiado'); }
+catch {
+const ta = document.createElement('textarea'); ta.value = lastMsg; document.body.appendChild(ta);
+ta.select(); try{ document.execCommand('copy'); toast('Mensaje copiado'); }catch{ toast('No se pudo copiar'); } ta.remove();
+}
 });
+
 $('reset-btn').addEventListener('click', () => {
-  $('rsvp-form').reset();
-  $('rsvp-form').style.display = '';
-  $('rsvp-ok').style.display = 'none';
+$('rsvp-form').reset();
+$('rsvp-form').style.display = '';
+$('rsvp-ok').style.display = 'none';
 });
 
 /* ================= Animación al hacer scroll ================= */
 (function(){
-  const els = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)){ els.forEach(el => el.classList.add('in')); return; }
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
-  }, {threshold:.12});
-  els.forEach(el => io.observe(el));
+const els = document.querySelectorAll('.reveal');
+if (!('IntersectionObserver' in window)){ els.forEach(el => el.classList.add('in')); return; }
+const io = new IntersectionObserver(entries => {
+entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+}, {threshold:.12});
+els.forEach(el => io.observe(el));
 })();
 </script>
 </body>
