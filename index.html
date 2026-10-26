@@ -101,6 +101,17 @@ position:relative;min-height:100vh;min-height:100svh;
 display:flex;flex-direction:column;align-items:center;justify-content:center;
 text-align:center;padding:calc(40px + var(--sat)) 20px 40px;overflow:hidden;
 }
+/* Foto de portada: arriba de todo, se desvanece hacia abajo y hacia los costados */
+.hero-photo{
+position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:1;
+width:min(100%,640px);height:60vh;height:60svh;pointer-events:none;
+background:url("foto-inicio.jpg") center 22%/cover no-repeat;
+-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 45%,transparent 100%),linear-gradient(to right,transparent 0%,#000 14%,#000 86%,transparent 100%);
+-webkit-mask-composite:source-in;
+mask-image:linear-gradient(to bottom,#000 0%,#000 45%,transparent 100%),linear-gradient(to right,transparent 0%,#000 14%,#000 86%,transparent 100%);
+mask-composite:intersect;
+}
+header.hero{padding-top:calc(46vh + var(--sat));padding-top:calc(46svh + var(--sat))}
 .blob{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
 .blob.a{top:-80px;left:-80px;width:290px;height:290px;background:rgba(249,210,217,.7)}
 .blob.b{bottom:-80px;right:-80px;width:320px;height:320px;background:rgba(244,176,189,.5)}
@@ -271,6 +282,7 @@ html{scroll-behavior:auto}
 
 <!-- Portada -->
 <header class="hero">
+<div class="hero-photo" role="img" aria-label="Virginia"></div>
 <div class="blob a"></div><div class="blob b"></div>
 <div class="hero-inner">
 <span class="pill">Mis 15 Años</span>
